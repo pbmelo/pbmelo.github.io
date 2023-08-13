@@ -37,3 +37,8 @@ gem "webrick", "~> 1.8"
 
 # yat theme
 gem "jekyll-theme-yat"
+
+# markdown shit
+group :jekyll_plugins do
+  gem 'jekyll-commonmark-ghpages'
+end
