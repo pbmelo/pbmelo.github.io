@@ -2,7 +2,8 @@
 layout: post
 title:  "CNC laser cutting on Linux"
 date:   2023-08-10 17:56:46 -0700
-categories: CNC laser linux grbl
+categories: tutorials
+tags: CNC laser linux grbl
 ---
 
 ## What is GRBL?
@@ -49,7 +50,7 @@ tail -f /dev/ttyUSB0
 
 ## Generating a g-code for a 2D project (machining or laser cutting)
 
-Inkscape is a powerful tool
+Inkscape is a powerful tool to 
 
 ## Useful links and references
 

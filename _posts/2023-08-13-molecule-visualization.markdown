@@ -2,7 +2,8 @@
 layout: post
 title:  "Creating beautiful molecular visualizations with Blender and Avogadro"
 date:   2023-08-12 11:00:00 -0700
-categories: blender avogadro science
+categories: tutorials
+tags: blender avogadro science
 ---
 
 In this short tutorial, I will be showing how to render beautiful molecular visualizations (like the image below) for your presentation, website, journal cover, or just a custom artistic wallpaper using two very powerful tools, Blender and Avogadro.
