@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Linux CNC"
+title:  "CNC laser cutting on Linux"
 date:   2023-08-10 17:56:46 -0700
 categories: CNC laser linux
 ---
@@ -9,8 +9,10 @@ categories: CNC laser linux
 
 ## Useful links and references
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+1. [Inkscape][inkscape]
 
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+[inkscape]: https://inkscape.org/
+[jtech-photonics]: https://jtechphotonics.com/?page_id=2012
+[cncjs]: https://cnc.js.org/
+[cncjs-git]: https://github.com/cncjs/cncjs
+[bcnc]: https://github.com/vlachoudis/bCNC
