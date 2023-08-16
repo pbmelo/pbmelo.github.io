@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Creating magnet links to share files via torrent"
+title:  "Creating torrent files and magnet links to share data with your friends"
 date:   2023-08-15 22:26:00 -0700
 categories: tutorials opinion
 tags: torrent
@@ -24,29 +24,49 @@ In summary, the whole process is very simple and consists of two steps:
 1. Create a `.torrent` file;
 2. Add it to your torrent client to seed it.
 
+To create a torrent file, we will need the file or directory that we are sharing (obviously) and a tracker (optional).  [According to wikipedia][tracker-wiki], "a BitTorrent tracker is a special type of server that assists in the communication between peers using the BitTorrent protocol".  A list of trackers can be found online, for instance [here][trackerslist2] or [here][trackerslist1].
+
 ## Alternative 1, ctorrent
 
-I got this from Ask Ubuntu forums, [this post][askubuntu-question-ctorrent].
+I got this set of instructions from Ask Ubuntu forums, [this post][askubuntu-question-ctorrent].
 
-Just install ctorrent and run
+Just install ctorrent and run the following commands
 
 ```console
 ctorrent -t -u "http://tracker.example.com:6969/announce" -s example.torrent file_or_dir_to_upload
+```
+to create your tracker and
+```console
 ctorrent example.torrent
 ```
+to start seeding it.
 
-Then share your file with your friends!
+Then share your file with your friends and they should be able to download it via torrent
 
 ## Alternative 2, transmission-cli
 
-I got this from Linux Config, [this post][linuxconfig-transmission].
+I got this set of instructions from Linux Config, [this post][linuxconfig-transmission].
+
+Install [transmission-cli][transmission-git] and run
 
 ```console
-transmission-create /home/linuxconfig/my_torrent/ -t udp://tracker.openbittorrent.com:80
-transmission-remote -a ~/my_torrent.torrent
+transmission-create file_or_dir_to_upload -t udp://tracker.openbittorrent.com:80
 ```
+to create your `.torrent` and
+```console
+transmission-remote -a file_or_dir_to_upload.torrent
+```
+to start seeding.
 
 And voila!  Just send the file over to your friends.
+
+## Converting torrent files into magnet links
+
+To convert your `.torrent` file into a magnet link, just copy the output of the following command
+```console
+transmission-show -m yourfiles.torrent
+```
+and share it.  You can pipe it to `xclip` or a similar application and send it to someone as a text.
 
 ## Relevant links
 
@@ -67,3 +87,7 @@ The information below was typed on Aug 15th, 2023, so prices and storage limits 
 [askubuntu-question-ctorrent]: https://askubuntu.com/questions/32024/how-to-create-a-torrent-using-the-command-line
 [linuxconfig-transmission]: https://linuxconfig.org/how-to-create-and-share-torrent-on-linux
 [wasi-odyssey]: https://wasi0013.com/2018/10/21/how-to-create-a-torrent-file-in-linux/
+[transmission-git]: https://github.com/transmission/transmission
+[tracker-wiki]: https://en.wikipedia.org/wiki/BitTorrent_tracker
+[trackerslist1]: https://github.com/ngosang/trackerslist
+[trackerslist2]: https://www.theunfolder.com/torrent-trackers-list/
