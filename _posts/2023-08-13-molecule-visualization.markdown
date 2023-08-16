@@ -8,7 +8,7 @@ tags: blender avogadro science
 
 In this short tutorial, I will be showing how to render beautiful molecular visualizations (like the image below) for your presentation, website, journal cover, or just a custom artistic wallpaper using two very powerful tools, Blender and Avogadro.
 
-![My image Name](/assets/images/morphine2-4k.png)
+![Morphine molecule render](/assets/images/morphine2-4k.png)
 
 ## Installing dependencies (Avogadro)
 
@@ -22,12 +22,14 @@ Basically, for this project we will need Avogadro and Blender, which are two sof
 On Debian, the command below will install Avogadro2 and its dependencies, as well as Open Babel.  It's truly straightforward.
 
 ```console
-$ sudo apt install avogadro openbabel
+sudo apt install avogadro openbabel
 ```
-$ python3 -m venv .venv
-$ source .venv/bin/activate
 
 Debian is adopting [PEP 668 – Marking Python base environments as ``externally managed''](https://peps.python.org/pep-0668/).
+```console
+python3 -m venv .venv
+source .venv/bin/activate
+```
 
 </p>
 </details>
@@ -39,11 +41,27 @@ Debian is adopting [PEP 668 – Marking Python base environments as ``externally
 	<summary>(Click to expand)</summary>
 <p>
 
-As of today, Avogadro is not available through the official Arch repositories, so you might have to install it from source, using a third party package manager like flatpak, or through the AUR.  The instructions if you're using flatpak are detailed below, while here I will explain how to get it through the AUR.
-
+To get openbabel, simply type
 ```console
-git clone 
-sudo pacman -Sy
+sudo pacman -Sy openbabel
+```
+
+But as of today, Avogadro is not available through the official Arch repositories, so you might have to install it from source, using a third party package manager like flatpak, or through the AUR.  The instructions if you're using flatpak are detailed below, while here I will explain how to get it through the AUR.
+
+(App image)
+```console
+git clone https://aur.archlinux.org/avogadro2-appimage.git
+cd avogadro2-appimage
+makepkg -Si
+makepkg -si
+```
+
+(Upstream git)
+```console
+git clone https://aur.archlinux.org/avogadroapp.git
+cd avogadro2-appimage
+makepkg -Si
+makepkg -si
 ```
 
 </p>
@@ -57,7 +75,7 @@ sudo pacman -Sy
 <p>
 
 ```console
-sudo rpm install
+sudo rpm install avogadro2 openbabel
 ```
 
 </p>
@@ -71,7 +89,7 @@ sudo rpm install
 <p>
 
 ```console
-sudo flatpak install
+sudo flatpak install flathub org.openchemistry.Avogadro2
 ```
 
 </p>
@@ -84,11 +102,7 @@ sudo flatpak install
 	<summary>(Click to expand)</summary>
 <p>
 
-[The official OpenChemistry GitHub repository for avogadro](avogadro-libs) provides nightly AppImage builds that you can download straight through your browser.  Alternatively, they provide detailed instructions on how to build it from souce [here](https://two.avogadro.cc/install/build.html).
-
-```console
-sudo flatpak install
-```
+[The official OpenChemistry GitHub repository for avogadro][avogadro-libs] provides nightly AppImage builds that you can download straight through your browser.  Alternatively, they provide detailed instructions on how to build it from souce [here](https://two.avogadro.cc/install/build.html).
 
 </p>
 </details>
