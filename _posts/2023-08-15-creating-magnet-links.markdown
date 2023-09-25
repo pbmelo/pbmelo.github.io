@@ -8,7 +8,7 @@ tags: torrent
 
 ## How to create a magnet link to share files with friends via torrent
 
-This is a very short tutorial to a very good way of quickly sharing files with your friends.  I will share how to create and share magnet links via [ctorrent](http://localhost:4000/tutorials/2023/08/15/creating-magnet-links.html#h-alternative-1-ctorrent) and [transmission-cli](http://localhost:4000/tutorials/2023/08/15/creating-magnet-links.html#h-alternative-2-transmission-cli).  Click on the links to jump to the part of the post that matters.
+This is a very short tutorial to a very good way of quickly sharing files with your friends.  I will share how to create and share magnet links via [ctorrent](https://pbmelo.github.io/tutorials/opinion/2023/08/16/creating-magnet-links.html#h-alternative-1-ctorrent) and [transmission-cli](https://pbmelo.github.io/tutorials/opinion/2023/08/16/creating-magnet-links.html#h-alternative-2-transmission-cli).  Click on the links to jump to the part of the post that matters.
 
 ## Why create a torrent instead of uploading it to a commercial cloud storage service?
 
