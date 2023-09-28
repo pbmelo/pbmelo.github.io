@@ -2,13 +2,16 @@
 layout: post
 title:  "Creating beautiful molecular visualizations with Blender and Avogadro"
 date:   2023-08-12 11:00:00 -0700
+author: pedro
+banner:
+  image: /assets/images/render/morphine2-4k.png
 categories: tutorials
 tags: blender avogadro science
 ---
 
 In this short tutorial, I will be showing how to render beautiful molecular visualizations (like the image below) for your presentation, website, journal cover, or just a custom artistic wallpaper using two very powerful tools, Blender and Avogadro.
 
-![Morphine molecule render](/assets/images/morphine2-4k.png)
+![Morphine molecule render](/assets/images/render/morphine2-4k.png)
 
 ## Installing dependencies (Avogadro)
 

@@ -2,6 +2,9 @@
 layout: post
 title:  "Creating torrent files and magnet links to share data with your friends"
 date:   2023-08-15 22:26:00 -0700
+author: pedro
+banner:
+  image: "/assets/images/torrent/kali-torrent.png"
 categories: tutorials opinion
 tags: torrent
 ---
