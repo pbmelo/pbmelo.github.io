@@ -75,9 +75,15 @@ After drawing your project on Inkscape, just click on "Extensions", then "Genera
 
 To send serial commands to your GRBL microcontroller, you need an interface that will convert the g-code into commands that make sense to the machine.  There are many tools available to do this, but my favorite ones are [CNCjs][cncjs] and [bCNC][bcnc].  They both achieve the same purpose through two different philosophies/paradigms, which I will explain below.
 
+### CNCjs
+
 CNCjs uses Node.js to create a beautiful web-interface where you can import g-code files and control your CNC running Grbl, Smoothieware, or TinyG, through USB, bluetooth or wi-fi.  The main advantage of this method is that you can set up a small single-board computer connected to your CNC through USB and configure it to run a web server which can be accessed remotely, or use other wireless methods to connect to your machine.  The main disadvantage is that you need to go through the trouble of installing nodejs, which can take up a significant amount of space if storage is an issue and complicated package management/dependencies are unavoidable.  Of course, you can use [their docker image][cncjs-docker] and save you some trouble.
 
+### bCNC
+
 On the other hand, bCNC is a simple but fully featured and cross platform python program described by the authors as a "swiss army knife for all your CNC needs".  The main advantage of this method is the simpler installation compared to CNCjs, given that (at the time of writing, IMO) pip is more commonplace and simpler than Node.js.  Unfortunately, no official docker images are yet available, but generating one shouldn't be an issue.
+
+### General procedure
 
 Regardless of your method of choice, both (or any) alternatives will follow the same procedure:
 
