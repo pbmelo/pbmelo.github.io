@@ -1,0 +1,206 @@
+---
+layout: post
+title:  "Status of camera control using Linux in 2024"
+date:   2024-06-17 15:30:00 -0700
+author: pedro
+banner:
+  image: /assets/images/tethering/usb-tethering.jpeg
+categories: tutorials
+tags: DSLR mirrorless linux photography cameras
+---
+
+Recently, I decided to explore and push the capabilities of my DSLR by controlling it through more flexible and customizable ways instead of the closed and limited stock firmware.  Unfortunately, [camera "hacks" and patches][nikon-patch] can only get you so far.  Gladly, cameras with boring firmware can still be controlled by a more powerful and flexible machine: _a personal computer_.  The act of connecting a camera to a computer with the purpose of acquiring images is called _tethered shooting_.
+
+>[Tethered photography is the process of connecting your camera to a computer, tablet, or even a smartphone via a cable or wireless app. Once you've successfully connected the devices, any new image captured by the camera is then passed directly to the computer and saved in a designated folder.](https://digital-photography-school.com/tutorial-shoot-tethered/)
+
+<!--Some years ago, I've used [v4l][v4l] to use my DSLR as a webcam with some degree of success ([following Ben Chapman's instructions](https://www.crackedthecode.co/how-to-use-your-dslr-as-a-webcam-in-linux/)), but I quickly realized it was something too cumbersome for everyday usage in meetings.  It doesn't mean that tethering photography can't simplify things for other purposes instead of making them more complicated.  For instance, you can take advantage of a big screen for focus adjustments in macro or astrophotography.  Maybe you want to check live preview histograms on the go and your camera can't display them.  If you don't have an intervalometer or your camera firmware doesn't support scripted shooting, you can ask your computer to trigger your camera shutter.  Maybe you need HDR bracketing and don't want to do everything manually.  Well, you get my point.  Tethered photography opens a new set of possibilities with very little effort and virtually no cost.-->
+
+<p>
+<img src="/assets/images/tethering/usb-tethering.jpeg">
+    <em>Laptop and tethered camera, allowing you to control a fully-capable camera through your computer.</em>
+</p>
+
+Other tutorials cover the main idea of using Linux to control a camera, like [Ben Chapman's instructions on how to use your DSLR as a webcam in Linux](https://www.crackedthecode.co/how-to-use-your-dslr-as-a-webcam-in-linux/).  Tethered shooting is indeed a nice tool for several applications, like using your nice camera as a webcam for professional meetings (as just mentioned), or taking advantage of a bigger screen for fine focus adjustments in macro or astrophotography.  It also allows you to preview histograms on the go and script certain tasks like interval shooting or HDR bracketing, as well as save files directly to your computer's disk.
+
+_There are two main ways to use your computer for tethered shooting: USB and HDMI_.  Both come with their advantages and disadvantages.  To understand which will be better for the task you have in mind, we can look more into what they are and the applications where each one excels over the other.
+
+## USB tethering
+
+USB tethering consists of using your camera's __USB cable__ to communicate to your computer _while_ shooting.  Due to its flexibility and ability to effectively communicate in both ways, it is a useful way to send individual commands to the camera and scripting more complex tasks.  It is meant for people who want to control shooting settings and/or automatically download photos as they are shot, for easier editing or storage reasons.  The two most popular programs out there that are used for USB tethered shooting are [Darktable][darktable] and [Entangle][entangle], both of which will be discussed below.
+
+<p>
+<img src="/assets/images/tethering/camera-and-usb-cable.jpeg">
+    <em>Camera, USB cable, and a computer: all you need to get started.</em>
+</p>
+
+### Darktable
+[Darktable][darktable] is a "photography workflow application and raw developer".  It can manipulate raw image files in every way imaginable.  It is my go-to program to edit my photos; adjust white balance, rotate and crop, export raw files to jpg, etc.  On top of that, Darktable is also capable of controlling a camera that is connected to a computer through USB using [libgphoto2][libgphoto2].
+
+<p>
+<img src="/assets/images/tethering/darktable-window.png">
+    <em>Darktable.  Probably the best photography workflow software ever made.</em>
+</p>
+
+After connecting your camera to your computer, you can launch Darktable and your camera will likely appear under the _import_ sub-menu of the _lighttable_ tab.  You can then on click _mount camera_ and _tethered shoot_.  Just start a new session/capture job and you will see a list of "image information" on the left and camera properties on the right.  You can then click on the _live view_ icon (an eye) to enable previewing what is detected by your camera's sensor in real time.  Everything is straightforward from there.
+
+<p>
+<img src="/assets/images/tethering/darktable-with-camera-preview.png">
+    <em>Seeing through live view on Darktable.  Note how all the capture parameters of the exposure triangle are accessible for controlling, as well as a live histogram.</em>
+</p>
+
+You can change settings such as the aperture, shutter speed, ISO, etc and activate the shutter whenever you want.  The files will be saved on your computer on a folder according to your settings (likely `/home/user/Pictures/Darktable/yyyymmdd_capturejob`).
+
+**Summarizing**, click on:
+1. lighttable tab (top right);
+2. mount camera (left panel);
+3. tethered shoot (left panel);
+4. create a new capture job (right panel).
+
+To start shooting, click on the enable live view icon (small eye, right panel) and start shooting.
+
+#### Nice feature: HDR bracketing
+As mentioned before, Darktable can automatically shoot and download files to your computer while controlling some camera parameters, including exposure compensation.  One of my favorite out-of-the-box features it ships with is the HDR bracketing support.  You can use the feature to automatically take HDR photos and apply your presets to files, which might save some time if your camera doesn't support auto-HDR and you need to take a lot of pictures (for a time lapse, for example).
+
+### Entangle
+[Entangle][entangle] is a GTK3 graphical interface for tethered shooting using [libgphoto2][libgphoto2].  It is a simple, minimalist, and great software where you can control just enough without too much bloatware and overly complicated features.  Albeit simple, Entangle is fully-featured: you can control exposure time, aperture diameter, ISO, activate your shutter (obviously), write custom scripts to shoot while controlling all those parameters, etc.
+
+<p>
+<img src="/assets/images/tethering/entangle-window-with-preview.png">
+    <em>Entangle window.  Note how the interface is simple and yet fully featured, with a histogram and direct access to all settings relevant to control your shot for a correct exposure.</em>
+</p>
+
+Entangle is ridiculously simple to use: you just need to click on the continuous capture preview icon on the top left corner (your camera will probably be recognized automatically) and start shooting.  _Voila!_  Yes, it's that easy.  You can see all the control parameters on the left panel, called _Camera settings_.
+
+#### Nice feature: Support for plugins
+One of the nicest things about Entangle is its simplicity and modularity.  The user can simply install (or write their own) plugins that perform custom tasks such as a digital intervalometer for time lapses, astrophotography stacking, or other applications.  I personally used Entangle to capture the solar eclipse over the US in March 2024.
+
+## HDMI
+Apart from fully controlling your camera through USB, another useful and interesting approach is taking advantage of the camera's HDMI output.  If you want to mirror your camera's screen on a larger display, this is a fantastic way of doing it.  It might be better suited for video or capture preview, while USB tethering might be more appropriate for actually shooting stills from your computer, even though both approaches can perform both tasks.
+
+<p>
+<img src="/assets/images/tethering/hdmi-usb-capture-card.jpeg">
+    <em>All you need for capturing your camera's HDMI output: an HDMI cable and a capture card (apart from the camera and the computer, of course!).  In my case, I am using a mini-HDMI to HDMI cable (your camera might use the same port or a micro-HDMI) and a regular-HDMI to USB capture card.</em>
+</p>
+
+There are many scenarios where connecting your camera to your computer through HDMI would be useful: if you are an educator, you can display your camera's output on a big screen while it captures a macro shot, or maybe the camera is coupled to a microscope.  You can show the camera settings screen or menu while teaching photography.  Or maybe you are a professional in a studio and a director or your clients want to see the framing of your shots as you photograph your subject.  The possibilities are endless.
+
+Anyway, connecting a camera to the computer through HDMI allows us to leverage the camera's live view capabilities to delegate some capturing tasks to the computer.  Sometimes, this allows better video recording capabilities than using the camera's built-in processor.  For example, your camera might only be able to record at FHD 30 fps while it can output FHD 60 fps through HDMI.  Thus, you can use a window capture software and store the video output directly to your computer.
+
+<p>
+<img src="/assets/images/tethering/hdmi-usb-full-setup.jpeg">
+    <em>Full setup for direct HDMI capture from your computer.  If your camera supports a clean HDMI output, that is a huge plus.  See below for details.</em>
+</p>
+
+There are two downsides of this method, however.  One is that you need a capture card (which can be cheap yet work wonderfully well, but nonetheless you still need one).  The other downside is that you will not be able to control the camera capture parameters from your computer, so you'll need to rely on what has been preset on your camera.
+
+Fortunately, USB-HDMI capture cards are fairly affordable nowadays.  They are are small devices containing an HDMI port to be used as an input and then converted to USB output.  Upon connecting the adapter to your computer, it will likely be recognized as a `/dev/video*` device (at least on reasonably modern Linux systems).  After that, you can see the output through an appropriate software, such as [VLC][vlc] or [obs-studio][obs].  **Warning: You might need to have root privileges or be part of the `video` group for this method to work.**
+
+<!--For instance, upon running `lsusb` after connecting my USB video capture card, I see
+
+```
+Bus 003 Device 009: ID 534d:2109 MacroSilicon USB Video
+```
+
+or for `dmesg`,
+
+```
+[  364.613645] usb 3-2: Product: USB Video
+[  364.613650] usb 3-2: Manufacturer: MACROSILICON
+[  364.616066] usb 3-2: Found UVC 1.00 device USB Video (534d:2109)
+[  364.620374] hid-generic 0003:534D:2109.0004: hiddev0,hidraw3: USB HID v1.10 Device [MACROSILICON USB Video] on usb-0000:00:14.0-2/input4
+[  365.236113] usbcore: registered new interface driver snd-usb-audio
+```
+
+You will see a video device as
+```
+$ ls /dev/video*
+/dev/video0  /dev/video1  /dev/video2  /dev/video3
+```-->
+
+#### A note on clean HDMI output
+To some people, a camera capable of outputting "clean" HDMI *is a must* to use any form of HDMI signal external capture.  When people talk about "clean-HDMI", they mean that a camera is capable of outputting through HDMI a signal containing *only* the image that is being detected by the sensor *and nothing else*.  That way, you can manipulate the "clean" sensor signal on your computer or field recording monitor without any "visual pollution".  For example, two HDMI previews of the same camera with the same composition are shown below.  One contains camera settings information and the live preview (not-clean HDMI), while the other consists of just the live preview itself (*clean* HDMI).
+
+<p>
+<img src="/assets/images/tethering/vlc-output-settings-with-preview.png">
+    <em>"Not-clean" HDMI output.  Useful for education and demonstration purposes.  Not so great for capturing "clean" video externally on a capture device and saving videos directly on your computer or field monitor.</em>
+</p>
+
+<p>
+<img src="/assets/images/tethering/vlc-output-clean-hdmi.png">
+    <em>Clean HDMI as seen by the computer: signal detected by the sensor and nothing else.</em>
+</p>
+
+Check your camera's manual to see if your gear is capable of outputting clean HDMI and how to enable it.  On Nikon DSLRs (gear that I own), you can press the "info" button while in live-view mode to switch between different HDMI output modes.
+
+### VLC
+[VLC][vlc] is arguably the best media player out there.  If a media player can do something, VLC can do it better.  It is possible to connect your camera to a capture card, which will be recognized as a video4linux2 device (`/dev/video*`) and then VLC is able to preview and capture its output.
+
+To do it, just connect your USB capture card (or equivalent) to your computer, open VLC and click on:
+1. Media;
+2. Open capture device (Ctrl+c);
+3. Advanced options;
+4. On "Select video device", enter something like `/dev/video2` or `/dev/video4`. `/dev/video1` is probably your integrated webcam;
+5. Hit Play.
+
+Now you will be able to see your camera's HDMI output on VLC's screen, as shown below.
+<p>
+<img src="/assets/images/tethering/vlc-output-camera-settings.png">
+    <em>VLC displaying a camera's HDMI output.  You can record it, use it as a large screen preview, or as a live presentation medium for spectators.  Some cameras can cycle through "camera settings", "preview with settings", and "clean HDMI" outputs.  See the section above for details.</em>
+</p>
+
+### OBS studio
+[OBS][obs] (open broadcast software) is the gold standard in video recording and live streaming.  It is able to manage all sorts of audio and video capture that are available to the machine.  It is capable of recording and combining the inputs of window screens, webcams, USB cameras, IP cameras, microphones and instruments; manipulate the input in layers and finally output the end result to a file or broadcast to a live stream.  OBS is truly an amazing software.
+
+<p>
+<img src="/assets/images/tethering/obs-output-clean-hdmi.png">
+    <em>OBS, a fully featured video broadcasting suite capable of handling V4L2 USB capture cards and converting them into useful signal for your computer.</em>
+</p>
+
+To capture using OBS is very simple.  Just follow the steps below:
+1. Look under the sources panel;
+2. Click on the plus icon;
+3. Choose video capture device (V4L2);
+4. Pick USB video (or equivalent) and accept. Note that you can set things like hue, saturation, brightness, contrast, etc.  This can be a great feature for live streaming.
+
+#### Nice feature: Video compositing capabilities
+One of the coolest features of OBS is to make compositions using different video and audio sources (window capture, webcam, external camera, etc) and output them to a single stream of video data.  For example, you can record a slide presentation and your webcam's signal simultaneously, merge the outputs together by overlaying your face on the slide background and save it to a video.  Below, I illustrate my point by showing my camera's HDMI output on top of a Firefox window.
+
+<p>
+<img src="/assets/images/tethering/obs-output-composition.png">
+    <em>OBS boasts amazing composition capabilities.  The user can combine inputs from webcams, IP cameras, DSLRs, TV boxes, operating system graphics, etc and arrange them as desired.  The possibilities are endless.</em>
+</p>
+
+## Bonus: using a phone as a field monitor
+If you own a phone or compact tablet with a USB-C port and support for USB on-the-go (OTG), you can use it as a field monitor.  You can do it through USB tethered shooting or capturing the HDMI signal using a capture card.  In both cases, you will need to use a USB-C to USB-A OTG adapter and install software that can handle that form of communication.
+
+<p>
+<img src="/assets/images/tethering/usb-c-to-usb-a.jpeg">
+    <em>USB-C to USB-A adapter, all extra gear you need to use your phone as a field monitor.</em>
+</p>
+
+> ["USB On-The-Go (USB OTG or just OTG) is a specification first used in late 2001 that allows USB devices, such as tablets or smartphones, to also act as a host, allowing other USB devices, such as USB flash drives, digital cameras, mouse or keyboards, to be attached to them." -- Wikipedia](https://en.wikipedia.org/wiki/USB_On-The-Go)
+
+If you own a Linux phone or tablet, you can use the same software I described above.  For proprietary operating systems, this is also easily achievable, but I unfortunately can't recommend any specific apps for the task.
+
+<p>
+<img src="/assets/images/tethering/full-camera-phone-as-monitor-setup.jpeg">
+    <em>Phone as a field monitor.  A fun "hack" to avoid spending a small fortune on dedicated equipment but using an equally capable setup.  Bonus points if you have adapters and mounts to make it portable.</em>
+</p>
+
+## Useful links and references
+Check out the links below if you want to learn more about the subject.
+
+1. [Darktable][darktable]
+2. [Entangle][entangle]
+3. [VLC][vlc]
+4. [obs-studio][obs]
+5. [ffmpeg][ffmpeg]
+
+[v4l]: https://www.kernel.org/doc/html/latest/driver-api/media/v4l2-core.html
+[darktable]: https://www.darktable.org/
+[entangle]: https://entangle-photo.org/
+[libgphoto2]: http://gphoto.org/
+[nikon-patch]: https://simeonpilgrim.com/nikon-patch/nikon-patch.html
+[vlc]: https://www.videolan.org/vlc/
+[obs]: https://obsproject.com/
+[ffmpeg]: https://ffmpeg.org/
